@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.notice.register.mapper.RegisterMapper">
+
+    <insert id="insertBoard" parameterType="nbVO">
+        insert into notice_board(
+                                 title,
+                                 writer,
+                                 password,
+                                 content,
+                                 notice_status
+                                 )
+        values(#{title},
+               #{writer},
+               #{password},
+               #{content},
+               #{noticeStatus}
+        )
+        <selectKey keyProperty="boardId" resultType="int" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+    </insert>
+
+    <insert id="insertFile" parameterType="List">
+        insert into file (
+                                 filename,
+                                 real_filename,
+                                 board_id,
+                                 file_path,
+                                 file_size)
+        values
+        <foreach collection="list" item="fileVO" separator=",">
+            (
+             #{fileVO.filename},
+             #{fileVO.realFilename},
+             #{fileVO.boardId},
+             #{fileVO.filePath},
+             #{fileVO.fileSize}
+             )
+        </foreach>
+    </insert>
+
+    <update id="updateNoticeStatus">
+        UPDATE notice_board
+        SET notice_status = '0'
+        WHERE notice_status = '1'
+    </update>
+
+</mapper>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.notice.list.mapper.ListMapper">
+
+    <select id="selectMainNotice" resultType="nbVO">
+        select *
+        from notice_board
+        where notice_status = '1'
+    </select>
+
+    <select id="selectAllList" resultType="nbVO">
+        select nb.board_id,nb.title,nb.writer,nb.password,nb.content,nb.date,nb.notice_status,nb.views, count(f.board_id) as fileNum
+        from notice_board nb
+        left outer join file f on nb.board_id = f.board_id
+        group by nb.board_id,nb.title,nb.writer,nb.password,nb.content,nb.date,nb.notice_status,nb.views
+    </select>
+
+
+    <select id="selectFileByBoard_id" parameterType="int" resultType="fileVO">
+        select *
+        from file
+        where board_id = #{boId}
+    </select>
+
+
+    <select id="selectFile" parameterType="int" resultType="fileVO">
+        select * from file where board_id = #{boID}
+    </select>
+
+    <select id="selectAllSize" resultType="int">
+        select count(*)
+        from notice_board
+    </select>
+
+    <select id="selectByPaging" parameterType="map" resultType="nbVO">
+        select nb.board_id,nb.title,nb.writer,nb.password,nb.content,nb.date,nb.notice_status,nb.views, count(f.board_id) as fileNum
+        from notice_board nb
+                 left outer join file f on nb.board_id = f.board_id
+        group by nb.board_id,nb.title,nb.writer,nb.password,nb.content,nb.date,nb.notice_status,nb.views
+        order by nb.board_id asc
+        limit #{offset}, #{limit}
+    </select>
+
+    <select id="selectNoticeById" parameterType="int" resultType="nbVO">
+        select *
+        from notice_board
+        where board_id = #{boardId}
+    </select>
+
+    <update id="updateNoticeViews" parameterType="int">
+        update notice_board
+        set views = views + 1
+        where board_id = #{boardId}
+    </update>
+
+    <update id="updateBoard" parameterType="nbVO">
+        update notice_board
+        set title = #{title},
+            writer =#{writer},
+            content =#{content},
+            date = NOW(),
+            notice_status =#{noticeStatus}
+        where board_id = #{boardId}
+    </update>
+
+<!--    <delete id="deleteFile" parameterType="List">-->
+<!--        <foreach collection="list" item="file" separator=";">-->
+<!--            DELETE FROM file-->
+<!--            WHERE id = #{file.id}-->
+<!--        </foreach>-->
+<!--    </delete>-->
+
+    <delete id="deleteFile" parameterType="List">
+        DELETE FROM file
+        WHERE id IN
+        <foreach collection="list" item="file" open="(" separator="," close=")">
+            #{file.id}
+        </foreach>
+    </delete>
+</mapper>

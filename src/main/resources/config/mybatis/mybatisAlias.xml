@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!--
+        [마이바티스] 스프링에서 '_'를 사용한 컬럼명을 사용시 (ex) BOOk 테이블의 BOOK_ID
+                     카멜 케이스로 읽어줌 (bookId)
+     -->
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+    <!--  자주 사용하는 타입의 별칭을 세팅 -->
+    <typeAliases>
+        <!-- 변경 Log
+            47 -> 60, Dayinfo.java는 유지 Alias만 dayInfoVO로 변경.
+         -->
+        <!-- 수정하면 커밋 적어두고 추가하면 아래 개수 가감하여 적으시오. 양이 많으니 필요합니다. -->
+        <!-- 추가 개수 확인용 : 60개 (2023-01-06)  -->
+        <!-- A -->
+        <typeAlias type="com.notice.vo.NbVO" alias="nbVO"/>
+        <typeAlias type="com.notice.vo.FileVO" alias="fileVO"/>
+<!--        <typeAlias type="com.memo.signhand.vo.SignhandVO" alias="signhandVO"/>-->
+<!--        <typeAlias type="com.memo.signhand.vo.SearchKeywordVO" alias="searchKeywordVO"/>-->
+<!--        <typeAlias type="com.memo.signhand.vo.SignWordVO" alias="signWordVO"/>-->
+
+
+    </typeAliases>
+
+
+</configuration>
