@@ -9,7 +9,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 @Configuration
 @ComponentScan(basePackages = "com.notice")
-
+@EnableAspectJAutoProxy
 public class ApplicationConfig {
 
     @Bean
