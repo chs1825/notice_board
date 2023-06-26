@@ -32,6 +32,7 @@ public class ListController {
 //        log.debug("대표공지글 구성 확인표 : {}",listService.selectMainNotice());
 
         ListVo mainNotice = listService.getMainNotice();
+        log.debug("메인노티스 로그: {}" , mainNotice);
         model.addAttribute("mainNotice", mainNotice);
 
         return "list/listPage";
@@ -60,11 +61,15 @@ public class ListController {
     }
 
     @RequestMapping(value = "/dowmFile.do")
+//    public void downJson(HttpServletResponse response, @RequestParam("filePath") String filePath) throws IOException {
     public void downJson(HttpServletResponse response, @RequestParam("filePath") String filePath, @RequestParam("fileName") String fileName) throws IOException {
 
+        log.debug("이거 작동은 해??");
         log.debug("filePath : {}" , filePath);
+//        log.debug("fileName : {}" , fileName);
         File file = new File(filePath);
 //        String fileName = file.getName();
+//        String fileName = "ddd.hwp";
 
         response.setContentType("application/json");
         response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");

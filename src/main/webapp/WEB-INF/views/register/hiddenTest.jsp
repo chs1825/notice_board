@@ -37,7 +37,10 @@
 </form>
 
 
-
+<br>
+<input type="text" id="xssinput" value="">
+<button type="button" id="ajaxBtnReturnJson" name="ajaxBtnName">ajax 반환을 json에 model 담아서 반환 테스트</button>
+<br>
 
 
 
@@ -46,4 +49,50 @@
 </c:if>
 
 </body>
+<script>
+    let mBtn = document.querySelector('#ajaxBtnReturnJson');
+    mBtn.addEventListener('click', function () {
+        let xhr = new XMLHttpRequest();
+        let xssinput = document.querySelector("#xssinput").value;
+
+        let data = {
+            boardId: 3,
+            title: xssinput,
+            writer: 'cho',
+            password:'1111',
+            content: 'hi',
+            noticeStatus : '1'
+
+        }
+
+        let encodedData = "";
+        for (let key in data) {
+            encodedData += encodeURIComponent(key) + "=" + encodeURIComponent(data[key]) + "&";
+        }
+        encodedData = encodedData.substring(0, encodedData.length - 1);
+
+
+        console.log("인코딩 데이터:");
+        console.log(encodedData);
+
+        xhr.open('POST', 'ajaxModel.do');
+        xhr.setRequestHeader("Content-Type", 'application/x-www-form-urlencoded');
+
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                console.log("성공");
+                console.log(xhr.responseText);
+                console.log(xhr.responseText.test);
+            } else {
+                console.log("error");
+            }
+        }
+
+        xhr.send(encodedData);
+
+    });
+
+</script>
+
+
 </html>

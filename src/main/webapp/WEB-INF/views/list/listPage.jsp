@@ -29,6 +29,7 @@
                             <c:when test="${mainNotice.fileVOList.size() ne 0}">
                                 <c:forEach var="file" items="${mainNotice.fileVOList}" varStatus="status">
                                     <a href="/dowmFile.do?filePath=${file.filePath}&fileName=${file.realFilename}"  download="${file.realFilename}" data-path="${file.filePath}" id="#">${file.realFilename}</a>
+<%--                                    <a href="file:${file.filePath}"  download="${file.realFilename}" data-path="${file.filePath}" id="#">${file.realFilename}</a>--%>
                                     <c:if test="${not status.last}"><span id="forComaSpan">,</span></c:if>
                                 </c:forEach>
                             </c:when>
@@ -120,7 +121,8 @@
             tr.appendChild(tdBoardId);
 
             let tdTitle = document.createElement("td");
-            tdTitle.textContent = notice.title;
+            // tdTitle.textContent = notice.title;
+            tdTitle.innerHTML = notice.title;
             tr.appendChild(tdTitle);
 
             let tdWriter = document.createElement("td");

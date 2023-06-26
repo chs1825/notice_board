@@ -45,28 +45,6 @@ public class RegisterController {
 
 
 
-    @RequestMapping("/test.do")
-    public String testXss(){
-
-        return "register/hiddenTest";
-    }
-
-    @RequestMapping("testXss1.do")
-    public String testXss1(Model model, @RequestParam String test){
-
-        log.debug("test : {}", test);
-        model.addAttribute("changeText", test);
-        return "register/hiddenTest";
-    }
-
-    @RequestMapping("testXss2.do")
-    public String testXss2(Model model, @RequestParam String test){
-
-        log.debug("test : {}", test);
-        model.addAttribute("changeText", test);
-        return "register/hiddenTest";
-    }
-
 
 
 
