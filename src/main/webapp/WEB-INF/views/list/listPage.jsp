@@ -48,7 +48,7 @@
 </header>
 <main>
     <div class="buttons registerBtn">
-        <a href="/registerPage.do" class="button">공지사항 등록</a>
+        <a href="/register/registerPage.do" class="button">공지사항 등록</a>
     </div>
     <table>
         <thead>

@@ -12,7 +12,7 @@
 </head>
 <body>
 <h1>공지사항 등록</h1>
-<form action="/register.do" method="post" id="noticeForm" enctype="multipart/form-data">
+<form action="/register/register.do" method="post" id="noticeForm" enctype="multipart/form-data">
     <label for="title">제목</label>
     <input type="text" id="title" name="title" required><br>
     <label for="noticeStatus">대표 공지글 여부</label>
@@ -56,7 +56,7 @@
 
             // formData.submit();
             let xhr = new XMLHttpRequest();
-            xhr.open('POST', 'register.do');
+            xhr.open('POST', 'register/register.do');
             xhr.setRequestHeader('enctype', 'multipart/form-data');
             xhr.setRequestHeader('X-Requested-With','XMLHttpRequest');
 

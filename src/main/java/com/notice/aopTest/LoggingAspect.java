@@ -8,7 +8,7 @@ import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
 
 @Aspect
-@Component
+//@Component >> ApplicationConfig 에서 @bean 선언해주었기 때문에 선언해주지 않아도 되는 어노테이션
 @Slf4j
 public class LoggingAspect {
 

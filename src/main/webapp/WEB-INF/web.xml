@@ -8,12 +8,14 @@
 
   <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>/WEB-INF/config/root-context.xml</param-value>
+    <param-value>/WEB-INF/config/root-context.xml,/WEB-INF/config/spring-security.xml</param-value>
   </context-param>
 
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
+
+
 
 
   <servlet>
@@ -96,6 +98,13 @@
 <!--    <url-pattern>*.do</url-pattern>-->
 <!--    <url-pattern>/*</url-pattern>-->
 <!--  </filter-mapping>-->
-
+  <filter>
+    <filter-name>springSecurityFilterChain</filter-name>
+    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>springSecurityFilterChain</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
 
 </web-app>
